@@ -14,3 +14,5 @@
 [Statistical Reinforcement Learning - Note 1](https://github.com/zanghyu/RL_note/blob/master/pdf/Statistical%20Reinforcement%20Learning%20%20%20%20%20%20-%20%20Note%201.pdf)
 
 [deep_attention_recurrent_q_network](https://github.com/zanghyu/RL_note/blob/master/pdf/deep_attention_recurrent_q_network_note.pdf)
+
+[Abstraction Selection in Model-Based Reinforcement Learning](https://github.com/zanghyu/RL_note/blob/master/markdown/Abstraction%20Selection%20in%20Model-Based%20Reinforcement%20Learning.md)
