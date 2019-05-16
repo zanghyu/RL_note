@@ -16,3 +16,4 @@
 [deep_attention_recurrent_q_network](https://github.com/zanghyu/RL_note/blob/master/pdf/deep_attention_recurrent_q_network_note.pdf)
 
 [Abstraction Selection in Model-Based Reinforcement Learning](https://github.com/zanghyu/RL_note/blob/master/markdown/Abstraction%20Selection%20in%20Model-Based%20Reinforcement%20Learning.md)
+[Safe RL Meta RL 和Model-based RL](https://github.com/zanghyu/RL_note/blob/master/markdown/Safe%20RL%20Meta%20RL%20%E5%92%8CModel-based%20RL.md)
