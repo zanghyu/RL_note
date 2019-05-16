@@ -18,11 +18,11 @@
 
 ### Policy evaluation
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555485083329.png" style="zoom:50%"/>
+<img src="../picture/Statistical Reinforcement Learning_Note1/01.png" style="zoom:50%"/>
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555486781003.png" style="zoom:50%"/>
+<img src="../picture/Statistical Reinforcement Learning_Note1/02.png" style="zoom:50%"/>
 
-​                									<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555486889378.png" style="zoom:50%"/>
+​                									<img src="../picture/Statistical Reinforcement Learning_Note1/03.png" style="zoom:50%"/>
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555487436153.png" style="zoom:50%"/>
+<img src="../picture/Statistical Reinforcement Learning_Note1/04.png" style="zoom:50%"/>
 

@@ -12,7 +12,7 @@ MDP可以被定义为一个五元组$<S,A,P,R,\gamma>$ 。里面的各个符号�
 
 首先本文介绍了传统的很多种state聚类的方法：
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555488718478.png" style="zoom:80%"/>
+<img src="../picture/Towards a Unified Theory of State Abstraction for MDPs/01.png" style="zoom:80%"/>
 
 \[3\]: 随机动态规划，在factored设置中构建aggregation trees，以创建一个abstraction模型，其中固定策略下具有相同转移函数和奖励函数的状态被组合在一起。
 
@@ -89,7 +89,7 @@ $w(s)​$ 衡量了状态$S​$ 对abstract的状态$\phi(s)​$ 做的贡献。
 
 ## Case Studies
 
-![1555917319180](C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1555917319180.png)
+![1555917319180](../picture/Towards a Unified Theory of State Abstraction for MDPs/02.png)
 
 ## 总结
 

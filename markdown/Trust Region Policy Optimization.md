@@ -43,7 +43,7 @@ Policy optimization主要分为两个方面：
 
 #### 回顾Policy gradient
 
-<img src="E:\note\markdown_note\3.png" style="zoom:80%"/>
+<img src="../picture/TRPO/3.png" style="zoom:80%"/>
 
 策略梯度如图所示，在该式子中，整体的策略梯度是找到最大reward对应的最陡峭的方向（即梯度最大方向），而后面的期望中告诉我们这个梯度是要sample一条trajectory得出来的。（个人理解：这里的trajectory是指从游戏开始到游戏结束的整条轨迹，而有时候提到的rollout是指trajectory中的某一小段）。
 
@@ -53,9 +53,9 @@ Policy optimization主要分为两个方面：
 
 2. PG的方法假设其更新是平坦的，如果是在比较陡峭的地方可能就会产生比较差的结果。当一步更新过大时可能会导致灾难，更新过小又会导致学习过慢（如下图）。
 
-   ​	<img src="E:\note\markdown_note\5.png" style="zoom:90%"/>
+   ​	<img src="../picture/TRPO/5.png" style="zoom:90%"/>
 
-   ​	<img src="E:\note\markdown_note\4.png" style="zoom:80%"/>
+   ​	<img src="../picture/TRPO/4.png" style="zoom:80%"/>
 
     	如图所示，假设我们最开始处于黄点的位置，在这里地形比较平坦，因而我们要设置较大的学习率，以获得比较好的学习速度。但是假设有一个不太好的动作，我们就会从黄点跌落到红点。由于红点处的梯度很高，比较大的学习率可能会让策略向更低差的地方跌下去。因此实际上学习率对梯度的不敏感导致policy gradient的方法受到收敛问题的干扰。
 
@@ -69,7 +69,7 @@ $\begin{aligned} A_{\pi}(s, a)=& Q_{\pi}(s, a)-V_{\pi}(s), \text { where } a_{t}
 
 $\begin{array}{l}{\eta(\pi)=\mathbb{E}_{s_{0}, a_{0}, \ldots}\left[\sum_{t=0}^{\infty} \gamma^{t} r\left(s_{t}\right)\right], \text { where }} \\ {s_{0} \sim \rho_{0}\left(s_{0}\right), a_{t} \sim \pi\left(a_{t} | s_{t}\right), s_{t+1} \sim P\left(s_{t+1} | s_{t}, a_{t}\right)}\end{array}$ 
 
-$\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\left(s_{2}=s\right)+\dots$ 
+$\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\left(s_{2}=s\right)+\dots​$ 
 
 其中，$A$ 是优势函数，即该动作相对于平均而言有多少额外reward。$\eta_\pi$ 是期望的折扣reward。$\rho_\pi$ 是加了折扣的state访问频率。
 
@@ -159,7 +159,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 这个式子就告诉了我们当$\pi_{new}$ 的更新符合$\pi_{n e w}=(1-\alpha) \pi+\alpha \pi^{\prime}$ 的时候，我们策略的更新是有保障的提高的。整个论文的算法流程如下图：
 
-<img src="E:\note\markdown_note\7.png" style="zoom:50%"/>
+<img src="../picture/TRPO/7.png" style="zoom:50%"/>
 
 但是该算法仍然有一些问题，比如这里$\alpha$ 计算起来比较困难，而且该算法只能保证$\pi_{new}$ 在其更新公式下更新才能有保证。也就是说每次我们在更新策略的时候都要先计算好对应的$\alpha$，然后才能得到保证单调变好的策略。这其实并不利于应用，我们想要更加通用的方法来解决policy的问题，用一种不需要$\alpha$ 的方式。
 
@@ -207,7 +207,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 我们分析得到的式子可以发现，在$\pi_i$ 确定的情况下，$\eta(\pi_i)$ 和$M(\pi_i)$ 就确定了，那么只要我们增大$M_i(\pi_{i+1})$ ，就相当于优化了$\eta(\pi_{i+1})​$ 。这实际上就是利用了MM算法，我们在无法优化目标函数的情况下，转而优化其下界，他的下界提高的时候，目标函数也就得到了提高。
 
-<img src="E:\note\markdown_note\8.png" style="zoom:80%"/>
+<img src="../picture/TRPO/8.png" style="zoom:80%"/>
 
 #### 置信域
 
@@ -263,7 +263,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 转变为：
 
-​			$\begin{array}{l}{\theta_{k+1}=\arg \max _{\theta} g^{T}\left(\theta-\theta_{k}\right)}, {\text { s.t. } \frac{1}{2}\left(\theta-\theta_{k}\right)^{T} H\left(\theta-\theta_{k}\right) \leq \delta}\end{array}$ 
+​			$\begin{array}{l}{\theta_{k+1}=\arg \max _{\theta} g^{T}\left(\theta-\theta_{k}\right)}, {\text { s.t. } \frac{1}{2}\left(\theta-\theta_{k}\right)^{T} H\left(\theta-\theta_{k}\right) \leq \delta}\end{array}​$ 
 
 这里同时告诉了我们是如何从策略空间转移到参数空间的。
 
@@ -301,7 +301,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 最后我们得到了最终的整个算法流程：
 
-<img src="E:\note\markdown_note\10.jpg" style="zoom:70%"/>
+<img src="../picture/TRPO/10.jpg" style="zoom:70%"/>
 
 ### TRPO的一些限制
 
@@ -310,7 +310,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 ### PPO
 
-现在我们知道，整个TRPO算法中，最复杂的部分就是$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)$ 的目标函数中$C$ 难以设置。而PPO的一个改进版本就是将$C$ 设置成了一个自适应的超参数，从而简化了目标函数的优化过程。
+现在我们知道，整个TRPO算法中，最复杂的部分就是$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)​$ 的目标函数中$C​$ 难以设置。而PPO的一个改进版本就是将$C​$ 设置成了一个自适应的超参数，从而简化了目标函数的优化过程。
 
 关于PPO的部分可以参照[链接](https://medium.com/@jonathan_hui/rl-proximal-policy-optimization-ppo-explained-77f014ec3f12)
 
