@@ -102,7 +102,7 @@ Chelsea Finn
 
 ### 分类
 
-<img src="../picture/safeRLmetaRLmodelbasedRL/06.png" style="zoom:70%"/>
+<img src="../picture/safeRLmetaRLmodelbasedRL/07.png" style="zoom:70%"/>
 
 
 
