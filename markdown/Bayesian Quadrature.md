@@ -13,7 +13,7 @@
 然而蒙特卡洛的方法有些时候无法得到最优解：一是因为样本可能会有部分聚集在一团，影响了估计结果；二是比较接近的函数可能得到的结果是一样的。在文献[1]中，Hagan指出
 MC estimation is fundamentally unsound, as it violates the likelihood principle, and moreover, does not make full use of the data at hand。因此蒙特卡洛方法在一定程度上仍然不够好。
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1562742013523.png" style="zoom:70%"/>
+<img src="../picture/BQ/01.png" style="zoom:70%"/>
 
 
 
@@ -41,7 +41,7 @@ MC estimation is fundamentally unsound, as it violates the likelihood principle,
 
 此外，BQ的收敛速度比较快，适合少量数据时候使用。在实践中，可能我们需要尽可能少的点去尽量近似原积分，因此我们应当尽可能选择比较好的数据，这些数据也就可以根据acquisition function来计算得到[2]。
 
-<img src="C:\Users\zangh\AppData\Roaming\Typora\typora-user-images\1562742701632.png" style="zoom:70%"/>
+<img src="../picture/BQ/02.png" style="zoom:70%"/>
 
 其实BQ的核心到这里就结束了，但是我们到底应该怎么使用这种方法呢？
 
@@ -80,16 +80,17 @@ Given the surrogate GP on $f$ , the acquisition function $a$ , and a function ha
 - How to extend to high dimensions?  Gradient observations are helpful, but a D-dimensional gradient is D separate observations.
 
   
-    
+  
 
 ### 参考文献
 
 [1]:  A. O'Hagan. Monte-Carlo is fundamentally unsound. The Statistician, 36:247{249, 1987.
 
-[2]:https://nbviewer.jupyter.org/github/amzn/emukit/blob/master/notebooks/Emukit-tutorial-Bayesian-quadrature-introduction.ipynb
-[3]:  http://probabilistic-numerics.org/assets/pdf/nips2015_probint/roman_talk.pdf
+[2]: tutorial https://nbviewer.jupyter.org/github/amzn/emukit/blob/master/notebooks/Emukit-tutorial-Bayesian-quadrature-introduction.ipynb
+
+[3]:  talk   http://probabilistic-numerics.org/assets/pdf/nips2015_probint/roman_talk.pdf
 
 [4]: David Duvenaud. Bayesian Quadrature:Model-based Approximate Integration
 
-[5]: https://www.cse.wustl.edu/~garnett/cse515t/spring_2017/files/lecture_notes/11.pdf
+[5]:  lecture_note https://www.cse.wustl.edu/~garnett/cse515t/spring_2017/files/lecture_notes/11.pdf
 
