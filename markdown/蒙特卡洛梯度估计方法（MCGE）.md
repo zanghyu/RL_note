@@ -24,10 +24,10 @@ $$
 - 一致性，根据大数定理，当所采样的样本数量非常多时，MCE 的估计值将会收敛到积分的真值处。
 
 - 无偏性，MCE 是对所求积分的一个无偏估计，简单推导如下：
-  $$
+$$
   \mathbb{E}_{p(\mathbf{x} ; \boldsymbol{\theta})}\left[\overline{\mathcal{F}}_{N}\right]=\mathbb{E}_{p(\mathbf{x} ; \boldsymbol{\theta})}\left[\frac{1}{N} \sum_{n=1}^{N} f\left(\mathbf{x}^{(n)}\right)\right]=\frac{1}{N} \sum_{n=1}^{N} \mathbb{E}_{p(\mathbf{x} ; \boldsymbol{\theta})}\left[f\left(\mathbf{x}^{(n)}\right)\right]=\mathbb{E}_{p(\mathbf{x} ; \boldsymbol{\theta})}[f(\mathbf{x})]
-  $$
-  
+$$
+
 
 ​					MCE 的无偏性是随机优化算法收敛的重要保证。
 
@@ -49,8 +49,8 @@ $$
 
 #### SFGE的性质
 
-- 代价函数$f(x)$ 可以是任意函数。比如可微的，不可微的；离散的，连续的；白箱的，黑箱的等。这个性质是其最大的优点，使得很多不可微的甚至没有具体函数的黑箱优化问题都可以利用梯度优化求解。
-- 分布函数$$p(x;\theta)$$ 必须对 *θ* 是可微的。
+- 代价函数 $f(x)$ 可以是任意函数。比如可微的，不可微的；离散的，连续的；白箱的，黑箱的等。这个性质是其最大的优点，使得很多不可微的甚至没有具体函数的黑箱优化问题都可以利用梯度优化求解。
+- 分布函数 $$p(x;\theta)$$ 必须对 *θ* 是可微的。
 - 分布函数必须是便于采样的，因为梯度估计都是基于 MC 的，所以希望分布函数便于采样。
 - SFGE 的方差受很多因素影响，包括输入的维度和代价函数。
 
@@ -88,5 +88,5 @@ $$
 
 分布变换是统计学中一个基本的操作，在计算机中实际产生各种常见分布的随机数时，都是基于均匀分布的变换来完成的。有一些常见的分布变换可参见下表：
 
-<img src="D:/学习/github/RL_note/picture/Fisher/1.png" style="zoom:95%"/>
+<img src="../picture/Fisher/1.png" style="zoom:95%"/>
 
