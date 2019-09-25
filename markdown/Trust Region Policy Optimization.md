@@ -69,15 +69,16 @@ $\begin{aligned} A_{\pi}(s, a)=& Q_{\pi}(s, a)-V_{\pi}(s), \text { where } a_{t}
 
 $\begin{array}{l}{\eta(\pi)=\mathbb{E}_{s_{0}, a_{0}, \ldots}\left[\sum_{t=0}^{\infty} \gamma^{t} r\left(s_{t}\right)\right], \text { where }} \\ {s_{0} \sim \rho_{0}\left(s_{0}\right), a_{t} \sim \pi\left(a_{t} | s_{t}\right), s_{t+1} \sim P\left(s_{t+1} | s_{t}, a_{t}\right)}\end{array}$ 
 
-$\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\left(s_{2}=s\right)+\dots​$ 
+$\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\left(s_{2}=s\right)+\dots$ 
 
-其中，$A$ 是优势函数，即该动作相对于平均而言有多少额外reward。$\eta_\pi$ 是期望的折扣reward。$\rho_\pi$ 是加了折扣的state访问频率。
+其中，$A$ 是优势函数，即该动作相对于平均而言有多少额外reward。$\eta_\pi$ 是期望的折扣reward。$\rho_\pi$ 是加了折扣的state访问频率。 
+
 
 ### 从记号出发
 
 首先根据上面的记号，我们可以得出：
 
-​			$\eta\left(\pi^{\prime}\right)=\eta(\pi)+E_{\pi^{\prime}}\left[\sum_{t=0}^{\infty} \gamma^{t} A_{\pi}\left(s_{t}, a_{t}\right)\right]​$ 
+​			$\eta\left(\pi^{\prime}\right)=\eta(\pi)+E_{\pi^{\prime}}\left[\sum_{t=0}^{\infty} \gamma^{t} A_{\pi}\left(s_{t}, a_{t}\right)\right]$ 
 
 为什么这个式子是成立的呢？
 
@@ -103,7 +104,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 那么现在直接计算的路子已经堵死了，我们还能如何运用这个式子呢？没错，我们用近似的方法。
 
-首先我们进行一定程度的假设，假设策略的改变不影响state的访问频率，即$\rho_{\pi^{\prime}}(s) \approx \rho_{\pi}(s)​$ 。
+首先我们进行一定程度的假设，假设策略的改变不影响state的访问频率，即$\rho_{\pi^{\prime}}(s) \approx \rho_{\pi}(s)$ 。
 
 注意：**这里只是我们的一个假设，并不是他们真正相等**
 
@@ -145,17 +146,17 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 首先要说明的是，TRPO的整篇工作都是基于Kakade在2002年ICML上的论文《Approximately Optimal Approximate Reinforcement Learning》的工作进一步发展而来的，因此Kakade提出的这个方法是理解TRPO的关键。
 
-我们刚才说到了$\Delta\eta​$ 中的第二项要想办法近似或者忽略，这篇论文中就提出了一个方案：
+我们刚才说到了$\Delta\eta$ 中的第二项要想办法近似或者忽略，这篇论文中就提出了一个方案：
 
 ​			$\eta\left(\pi_{n e w}\right)-\eta(\pi) \geq A_{\pi}\left(\pi_{n e w}\right)-\frac{2 \epsilon \gamma}{(1-\gamma)} \alpha^{2}$ ，其中，
 
-​						$\pi_{n e w}=(1-\alpha) \pi+\alpha \pi^{\prime}​$ 
+​						$\pi_{n e w}=(1-\alpha) \pi+\alpha \pi^{\prime}$ 
 
 ​						$\epsilon=\frac{1}{1-\gamma}\left(\max _{s} \sum_{a} \pi^{\prime}(s, a) A^{\pi}(s, a)\right)$ 
 
 ​						$A_{\pi}\left(\pi^{n e w}\right) :=\sum_{s} \rho_{\pi}(s) \sum_{a} \pi^{n e w}(s, a) A^{\pi}(s, a)$ 
 
-注意这里关于策略有三个不同的量：$\pi​$，$\pi'​$ 和$\pi_{new}​$  。其中$\pi_{new}​$是根据前两个计算而来。这里的$\alpha​$ 和$\pi'​$ 都是可以通过计算得到的值。
+注意这里关于策略有三个不同的量：$\pi$，$\pi'$ 和$\pi_{new}$  。其中$\pi_{new}$是根据前两个计算而来。这里的$\alpha$ 和$\pi'$ 都是可以通过计算得到的值。
 
 这个式子就告诉了我们当$\pi_{new}$ 的更新符合$\pi_{n e w}=(1-\alpha) \pi+\alpha \pi^{\prime}$ 的时候，我们策略的更新是有保障的提高的。整个论文的算法流程如下图：
 
@@ -167,13 +168,13 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 于是针对于Kakade提出来的公式，TRPO进行了一定程度的改进：
 
-​			$\eta\left(\pi_{\text { new }}\right) \geq L_{\pi_{\text { ald }}}\left(\pi_{\text { new }}\right)-\frac{4 e \gamma}{(1-\gamma)^{2}} \alpha^{2}​$ ，其中，
+​			$\eta\left(\pi_{\text { new }}\right) \geq L_{\pi_{\text { ald }}}\left(\pi_{\text { new }}\right)-\frac{4 e \gamma}{(1-\gamma)^{2}} \alpha^{2}$ ，其中，
 
-​					$\epsilon=\max _{s, a}\left|A_{\pi}(s, a)\right|​$ 
+​					$\epsilon=\max _{s, a}\left|A_{\pi}(s, a)\right|$ 
 
-​					$L_{\pi}\left(\pi_{n e w}\right)=\eta(\pi)+\sum_{s} \rho_{\pi}(s) \sum_{a} \pi_{n e w}(a | s) A_{\pi}(s, a)​$ 
+​					$L_{\pi}\left(\pi_{n e w}\right)=\eta(\pi)+\sum_{s} \rho_{\pi}(s) \sum_{a} \pi_{n e w}(a | s) A_{\pi}(s, a)$ 
 
-​					$P\left(a \neq a_{\text { new }} | s\right) \leq \alpha​$ 
+​					$P\left(a \neq a_{\text { new }} | s\right) \leq \alpha$ 
 
 对比一下两个公式就可以发现，在该式中，我们将$\pi'$ 去掉了，也就是说任意$\pi_{new}$ 都是可以保证满足这个不等式的。而这里的$\alpha$与上面的定义也有所不同。具体该式的证明过程可以在论文附录中找到，与Kakade2002中证明过程基本相同。
 
@@ -205,7 +206,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 ​			$\eta\left(\pi_{i+1}\right)-\eta\left(\pi_{i}\right) \geq M_{i}\left(\pi_{i+1}\right)-M\left(\pi_{i}\right)$ 
 
-我们分析得到的式子可以发现，在$\pi_i$ 确定的情况下，$\eta(\pi_i)$ 和$M(\pi_i)$ 就确定了，那么只要我们增大$M_i(\pi_{i+1})$ ，就相当于优化了$\eta(\pi_{i+1})​$ 。这实际上就是利用了MM算法，我们在无法优化目标函数的情况下，转而优化其下界，他的下界提高的时候，目标函数也就得到了提高。
+我们分析得到的式子可以发现，在$\pi_i$ 确定的情况下，$\eta(\pi_i)$ 和$M(\pi_i)$ 就确定了，那么只要我们增大$M_i(\pi_{i+1})$ ，就相当于优化了$\eta(\pi_{i+1})$ 。这实际上就是利用了MM算法，我们在无法优化目标函数的情况下，转而优化其下界，他的下界提高的时候，目标函数也就得到了提高。
 
 <img src="../picture/TRPO/8.png" style="zoom:80%"/>
 
@@ -213,7 +214,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 现在我们有了明确的优化目标，我们想要得到：
 
-​			$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)​$ 
+​			$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)$ 
 
 在实际优化过程中，我们会发现这个式子会有个问题：当$\gamma$ （折扣因子）越接近于1的时候，这里的$C$ 会变的越大，相对应的梯度就会变得越小。一个比较好的方案是把这里的$C$ 当做超参数来处理，但是$C$ 又不能是一个固定不变的超参数，而应该是一个adaptive的值。这就导致调节这个超参数比较复杂。因此我们需要一个替代方案。
 
@@ -263,7 +264,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 转变为：
 
-​			$\begin{array}{l}{\theta_{k+1}=\arg \max _{\theta} g^{T}\left(\theta-\theta_{k}\right)}, {\text { s.t. } \frac{1}{2}\left(\theta-\theta_{k}\right)^{T} H\left(\theta-\theta_{k}\right) \leq \delta}\end{array}​$ 
+​			$\begin{array}{l}{\theta_{k+1}=\arg \max _{\theta} g^{T}\left(\theta-\theta_{k}\right)}, {\text { s.t. } \frac{1}{2}\left(\theta-\theta_{k}\right)^{T} H\left(\theta-\theta_{k}\right) \leq \delta}\end{array}$ 
 
 这里同时告诉了我们是如何从策略空间转移到参数空间的。
 
@@ -310,7 +311,7 @@ $\rho_{\pi}(s)=P\left(s_{0}=s\right)+\gamma P\left(s_{1}=s\right)+\gamma^{2} P\l
 
 ### PPO
 
-现在我们知道，整个TRPO算法中，最复杂的部分就是$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)​$ 的目标函数中$C​$ 难以设置。而PPO的一个改进版本就是将$C​$ 设置成了一个自适应的超参数，从而简化了目标函数的优化过程。
+现在我们知道，整个TRPO算法中，最复杂的部分就是$\max _{\pi_{i}}\left(\mathcal{L}_{\pi}\left(\pi_{i}\right)-C D_{K L}^{\max }\left(\pi_{i}, \pi\right)\right)$ 的目标函数中$C$ 难以设置。而PPO的一个改进版本就是将$C$ 设置成了一个自适应的超参数，从而简化了目标函数的优化过程。
 
 关于PPO的部分可以参照[链接](https://medium.com/@jonathan_hui/rl-proximal-policy-optimization-ppo-explained-77f014ec3f12)
 
